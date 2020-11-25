@@ -41,7 +41,14 @@ Ejemplo:
 ```bash
 Mobbex.exe -t -cit "{\"total\": 100, \"currency\": \"ARS\", \"description\": \"Venta de Prueba\", \"reference\": \"Referencia001\", \"customer\": {\"identification\": \"99999999\", \"email\": \"demo@mobbex.com\", \"name\": \"Demo User\"}}"
 ```
-En este caso el nodo "customer" es **obligatorio**
+En este caso el nodo "customer" es **obligatorio**:
+- ```customer```: Objeto de tipo JSON con los datos del cliente.
+		
+    - ```uid```:  Identificador único e interno del cliente. Obligatorio.
+    - ```name```: Nombre del Cliente. Obligatorio.
+    - ```identification```: DNI. Obligatorio.
+    - ```phone```: Número de Celular.
+
 La respuesta del SDK será similar a la siguiente:
 
 ```json
@@ -70,7 +77,7 @@ La respuesta del SDK será similar a la siguiente:
 Debemos almacenar el parámetro ***token*** para utilizarlo en las próximas operaciones.
 
 ### 2. Crear Token de Tarjeta
->```APIKEY```: Llave Pública
+>```APIKEY```: Llave Pública  
 
 En este paso crearemos el token perteneciente a la tarjeta con la cuál se realizará la operación.
 Se realiza con la opción ***-ct***, pasando como parámetro el intent token generado en el paso anterior.
@@ -78,14 +85,14 @@ Se realiza con la opción ***-ct***, pasando como parámetro el intent token gen
 Mobbex.exe -ct "{\"it\": \"a143c8e2-46ae-4e61-8ddb-ec6f10f6d57b\"}"
 ```
 Existen 2 formas de cargar los datos de la tarjeta para generar el token:
-- **Ingreso manual**: con la opción ***-m*** luego de la opción -ct. Esta opción abre una ventana para que el usuario pueda cargar los datos de la tarjeta y, además, seleccionar el plan de cuotas de la operación. Es la opción por defecto si no se especifica. Ejemplo:
+- **Ingreso manual**: con la opción ***-m*** luego de la opción -ct. Esta opción abre una ventana para que el usuario pueda cargar los datos de la tarjeta y, además, seleccionar el plan de cuotas de la operación. Ejemplo:
 ```bash
 Mobbex.exe -ct "{\"it\": \"a143c8e2-46ae-4e61-8ddb-ec6f10f6d57b\"}" -m
 ```
 - **Ingreso a través de lector de tarjetas Mox**: con la opción ***-r*** luego de la opción -ct. Se debe indicar como parámetro de esta opción el tipo de lector a utilizar para realizar la operación, siendo los valores actualmente soportados:
   - ```BBPOS_CHBT```: Permite utilizar el lector BBPOS modelo CHB10
-  - ```INGENICO_5500```: Permite utilizar el lector Ingenico modelo 5500
-  - ```INGENICO_6500```: Permite utilizar el lector Ingenico modelo 6500
+  - ```INGENICO_5500```: Permite utilizar el lector Ingenico modelo Moby 5500
+  - ```INGENICO_6500```: Permite utilizar el lector Ingenico modelo Moby 6500
 ```bash
 Mobbex.exe -ct "{\"it\": \"a143c8e2-46ae-4e61-8ddb-ec6f10f6d57b\"}" -r "BBPOS_CHBT"
 ```
@@ -150,7 +157,7 @@ En este paso debemos almacenar los siguientes valores:
 - ```options.installment.reference```: Hace referencia al plan de cuotas seleccionado. Aplica solo a carga manual de tarjeta.
 
 ### 3. Obtener Medios de Pago y Cuotas
->```APIKEY```: Llave Pública
+>```APIKEY```: Llave Pública  
 
 En el caso de que la operación de tokenización haya sido realizada con un lector, o simplemente requiera obtener los medios de pago (planes de cuotas) asociados a una tarjeta, debe utilizar esta opción del SDK.
 Debe llamarse al archivo con la opción ***-gi*** pasando como parámetro de la opción los siguientes datos:
@@ -251,7 +258,7 @@ El resultado de esta operación es la siguiente:
 El parámetro a almacenar en este caso es ```reference``` del plan de cuotas elegido.
 
 ### 4. Confirmar Operación
->```APIKEY```: Llave Pública
+>```APIKEY```: Llave Pública  
 
 Para confirmar la operación y ejecutar finalmente el cobro, unicamente debe llamar al SDK con la opción ***-co*** y los siguientes parámetros en formato JSON:
  - ```it```: Intent token de la operación.
