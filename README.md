@@ -91,8 +91,6 @@ Mobbex.exe -ct "{\"it\": \"a143c8e2-46ae-4e61-8ddb-ec6f10f6d57b\"}" -m
 ```
 - **Ingreso a través de lector de tarjetas Mox**: con la opción ***-r*** luego de la opción -ct. Se debe indicar como parámetro de esta opción el tipo de lector a utilizar para realizar la operación, siendo los valores actualmente soportados:
   - ```BBPOS_CHBT```: Permite utilizar el lector BBPOS modelo CHB10
-  - ```INGENICO_5500```: Permite utilizar el lector Ingenico modelo Moby 5500
-  - ```INGENICO_6500```: Permite utilizar el lector Ingenico modelo Moby 6500
 ```bash
 Mobbex.exe -ct "{\"it\": \"a143c8e2-46ae-4e61-8ddb-ec6f10f6d57b\"}" -r "BBPOS_CHBT"
 ```
